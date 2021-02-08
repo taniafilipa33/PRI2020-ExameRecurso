@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pr SYSTEM "file:/C:/Users/comta/OneDrive/Exame//dtd-xsl/project_record.dtd">
+<pr>
+    <meta>
+        <key>PRI2020-ExameRecurso</key>
+        <title>Exame de PRI</title>
+        <bdate>08 Fevereiro</bdate>
+        <edate>08 Fevereiro</edate>
+        <supervisor>José Carlos Ramalho</supervisor>
+    </meta>
+    <workteam>
+        <worker num="a80624">
+            <name>Tânia Rocha</name>
+            <email>a85176@alunos.uminho.pt</email>
+        </worker>
+    </workteam>
+    <abstract>
+        <paragrafo>Pergunta 1</paragrafo>
+        <paragrafo>mongoimport -d PEI2020 -c teams --jsonArray PEI-teams.json  </paragrafo>
+       
+        <paragrafo>Pergunta 2</paragrafo>
+        <paragrafo>Para as questões seguintes foi usado o terminal do mongo para fazer as queries. Numa fase inicial foi efetuado o comando "show dbs" para
+        verificar que tudo estava correto e que a nova base de dados "PEI2020" tinha sido criada. Após esssa confirmação, efetuei o comando "use PEI2020" para 
+        a utilizar. </paragrafo>
+        <paragrafo>Pergunta 2.1</paragrafo>
+        <paragrafo>Para devolder o número de equipas tendo em conta que se trata de um ficheiro com as mesmas foi apenas necessário efetuas a seguinte query:</paragrafo>
+        <paragrafo>db.teams.find().count()</paragrafo>
+    
+        <paragrafo>Pergunta 2.2</paragrafo>
+        <paragrafo>db.teams.distinct("team").sort()</paragrafo>
+
+        <paragrafo>Pergunta 2.3</paragrafo>
+        <paragrafo>Este gerou um pouco de problema porque não é permitido fazer group sem _id , mas após uma pequena pesquisa o problema foi resolvido</paragrafo>
+        <paragrafo>db.teams.aggregate([{$project:{"_id":0, "members_count":{$size: "$members"},}},{$group: { "_id":null,"memebrs_total":{$sum:"$members_count"},}}])</paragrafo>
+        
+        <paragrafo>Pergunta 2.4</paragrafo>
+         <paragrafo>db.teams.aggregate([{"$unwind": "$members"},{"$project": {_id: 0,"numero": "$members.id", "nome": "$members.name"}}])</paragrafo>
+      
+   
+        <paragrafo>Pergunta 2.5</paragrafo>
+        <paragrafo>Não funciona nao sei porque m ,mas deve ser proximo disto</paragrafo>
+        <paragrafo>db.teams.aggregate([{$project:{"_id":0, "members_count":{$cond:{if:{"$members.course":{$regex: "MIEI"}},then: {$size: "$members"},else: 0}},}},{$group: { "_id":null,"memebrs_total":{$sum:"$members_count"},}}])</paragrafo>
+        
+         <paragrafo>Pergunta 3</paragrafo>
+         <paragrafo>foi tudo implementado</paragrafo>
+
+        <paragrafo>Pergunta 4 e 5</paragrafo>
+         <paragrafo>Não tive tempo de implentar...</paragrafo>
+
+    </abstract>
+</pr>

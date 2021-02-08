@@ -1,0 +1,30 @@
+extends header
+block content
+    .w3-card-4.w3-margin.w3-white      
+      h1 Gerir Recursos
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        br
+        table.w3-table-all.w3-centered
+            tr
+              th _id
+              th Team
+              th pitch1
+              th pitch2 
+              th techPitch 
+              th businessReport 
+              th techReport 
+              th nmembers
+            each e in teams
+              tr
+                td=e._id
+                td=e.team
+                td=e.pitch1
+                td=e.pitch2
+                td=e.techPitch
+                td=e.businessReport
+                td=e.techReport
+                td=e.nmembers
+        hr
+        br
+      
